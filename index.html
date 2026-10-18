@@ -68,7 +68,7 @@ header .s{font-size:.72rem;color:var(--ink2);margin-top:1px}
 @keyframes rise{to{opacity:1;transform:none}}
 
 /* cards */
-.card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);border:1px solid var(--line);padding:16px;margin-bottom:14px}
+.card{background:color-mix(in srgb,var(--card) 88%,transparent);border-radius:var(--r);box-shadow:var(--shadow);border:1px solid var(--line);padding:16px;margin-bottom:14px}
 .sec{font-size:.95rem;font-weight:700;margin:20px 4px 10px;display:flex;align-items:center;gap:7px}
 .sec svg{color:var(--acc)}
 .day-head{display:flex;align-items:baseline;gap:10px;margin:22px 4px 10px}
@@ -80,7 +80,7 @@ header .s{font-size:.72rem;color:var(--ink2);margin-top:1px}
 .tl::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1.5px;background:var(--line)}
 .tl-i{position:relative;margin-bottom:12px}
 .tl-i::before{content:"";position:absolute;left:-19.5px;top:18px;width:8.5px;height:8.5px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 3px var(--acc2)}
-.tl-c{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:13px 15px;box-shadow:var(--shadow)}
+.tl-c{background:color-mix(in srgb,var(--card) 90%,transparent);border:1px solid var(--line);border-radius:18px;padding:13px 15px;box-shadow:var(--shadow)}
 .tl-c .tm{font-size:.72rem;color:var(--acc);font-weight:600;font-variant-numeric:tabular-nums}
 .tl-c .nm{font-size:.95rem;font-weight:600;margin:2px 0 3px;font-family:var(--serif);letter-spacing:.03em}
 .tl-c .ds{font-size:.78rem;color:var(--ink2)}
@@ -107,7 +107,7 @@ header .s{font-size:.72rem;color:var(--ink2);margin-top:1px}
 .nav-b.pri{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
 
 /* todo */
-.todo{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 15px;margin-bottom:9px;box-shadow:var(--shadow)}
+.todo{display:flex;align-items:center;gap:12px;background:color-mix(in srgb,var(--card) 88%,transparent);border:1px solid var(--line);border-radius:16px;padding:13px 15px;margin-bottom:9px;box-shadow:var(--shadow)}
 .todo input{width:20px;height:20px;accent-color:var(--acc);flex-shrink:0}
 .todo .tx{flex:1;font-size:.86rem}
 .todo.done .tx{color:var(--ink3);text-decoration:line-through}
@@ -167,6 +167,63 @@ body[data-fx="off"] .card:active,body[data-fx="off"] .tl-c:active{transform:none
 .sw.on i{left:20px}
 .empty{text-align:center;color:var(--ink3);font-size:.8rem;padding:30px 0}
 @media(min-width:600px){.wrap{max-width:600px}}
+
+
+/* === 主题背景层(液态玻璃折射源) === */
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:var(--scene);transition:background .5s}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none}
+/* 九曲: 溪谷晨光(绿谷+水面光带+雾) */
+[data-t="yiqu"]{--scene:
+ radial-gradient(60% 40% at 15% 8%,rgba(255,255,255,.55),transparent 70%),
+ radial-gradient(50% 35% at 85% 20%,rgba(120,190,150,.35),transparent 70%),
+ radial-gradient(80% 30% at 50% 95%,rgba(70,130,100,.4),transparent 75%),
+ linear-gradient(165deg,#dcead9 0%,#c8dccc 40%,#b3cdbd 100%)}
+/* 岩香: 焙茶暖房(茶褐+炭火余温) */
+[data-t="yanxiang"]{--scene:
+ radial-gradient(55% 35% at 80% 10%,rgba(255,220,170,.5),transparent 70%),
+ radial-gradient(45% 30% at 10% 30%,rgba(200,140,90,.3),transparent 70%),
+ radial-gradient(70% 40% at 50% 100%,rgba(140,90,55,.35),transparent 75%),
+ linear-gradient(170deg,#f3e6d4 0%,#e8d5bc 45%,#dcc4a4 100%)}
+/* 玉瀑飞: 山涧水汽(青蓝+飞白) */
+[data-t="yupufei"]{--scene:
+ radial-gradient(50% 30% at 20% 12%,rgba(255,255,255,.6),transparent 70%),
+ radial-gradient(60% 35% at 80% 40%,rgba(110,180,210,.35),transparent 70%),
+ radial-gradient(80% 35% at 30% 95%,rgba(60,120,150,.35),transparent 75%),
+ linear-gradient(160deg,#dcebf2 0%,#c4dae6 45%,#aec9d8 100%)}
+/* 晚照: 丹霞落日(橙金+山影) */
+[data-t="wanyi"]{--scene:
+ radial-gradient(60% 40% at 70% 15%,rgba(255,200,140,.65),transparent 70%),
+ radial-gradient(45% 30% at 20% 35%,rgba(230,140,100,.3),transparent 70%),
+ radial-gradient(75% 35% at 50% 100%,rgba(160,80,60,.4),transparent 75%),
+ linear-gradient(170deg,#f8e3d2 0%,#efd0b8 45%,#e4baa0 100%)}
+/* 月夜色: 夜宿山中(深墨+萤光+月晕) */
+[data-t="yueyese"]{--scene:
+ radial-gradient(30% 22% at 75% 12%,rgba(230,240,210,.28),transparent 70%),
+ radial-gradient(50% 30% at 15% 30%,rgba(90,140,110,.25),transparent 70%),
+ radial-gradient(20% 12% at 30% 60%,rgba(180,220,150,.18),transparent 70%),
+ radial-gradient(70% 40% at 50% 100%,rgba(20,35,28,.6),transparent 75%),
+ linear-gradient(170deg,#20292c 0%,#1a2327 50%,#141d21 100%)}
+/* 竹溪: 竹林翠影(竹绿+洒光) */
+[data-t="zhuxi"]{--scene:
+ radial-gradient(40% 26% at 25% 10%,rgba(255,255,235,.5),transparent 70%),
+ radial-gradient(30% 20% at 70% 30%,rgba(160,210,110,.3),transparent 70%),
+ radial-gradient(60% 30% at 45% 95%,rgba(70,120,60,.4),transparent 75%),
+ linear-gradient(165deg,#e3edda 0%,#d2e2c4 45%,#bdd4ab 100%)}
+/* 岩乳: 茶汤琥珀(深褐+茶烟) */
+[data-t="yanru"]{--scene:
+ radial-gradient(50% 30% at 70% 12%,rgba(240,215,170,.45),transparent 70%),
+ radial-gradient(40% 28% at 15% 40%,rgba(160,120,70,.28),transparent 70%),
+ radial-gradient(70% 40% at 50% 100%,rgba(90,65,35,.4),transparent 75%),
+ linear-gradient(170deg,#eee2c8 0%,#e2d1ac 45%,#d3bd92 100%)}
+/* 云鸟: 云海雾峰(雾紫+云带) */
+[data-t="yunniao"]{--scene:
+ radial-gradient(55% 30% at 25% 15%,rgba(255,255,255,.6),transparent 70%),
+ radial-gradient(45% 25% at 80% 45%,rgba(170,150,220,.35),transparent 70%),
+ radial-gradient(65% 30% at 50% 98%,rgba(100,85,150,.35),transparent 75%),
+ linear-gradient(165deg,#e9e4f2 0%,#d9d2e8 45%,#c6bcdc 100%)}
+
+/* 夜色主题下场景适配 */
+[data-t="yueyese"] .card,[data-t="yueyese"] .tl-c,[data-t="yueyese"] .todo{background:rgba(31,35,43,.86)}
 
 /* === 主题特效层 === */
 .tabs{position:fixed!important;bottom:0!important;z-index:60!important}
