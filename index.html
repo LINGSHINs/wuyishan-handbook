@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#f7f5f2">
+<title>武夷山疗休养</title>
+<style>
+:root{
+  --bg:#f6f4ef; --bg2:#edeae2; --card:#fffefb; --ink:#2a251d; --ink2:#7a7266; --ink3:#b0a899;
+  --acc:#4a6b57; --acc2:#e7efe8; --line:#e6e1d6; --shadow:0 6px 24px rgba(38,34,28,.06);
+  --r:20px; --serif:"Noto Serif SC","Songti SC","STSong",serif;
+}
+[data-t="yiqu"]{--bg:#f6f4ef;--bg2:#edeae2;--card:#fffefb;--ink:#2a251d;--ink2:#7a7266;--ink3:#b0a899;--acc:#4a6b57;--acc2:#e7efe8;--line:#e6e1d6;}
+[data-t="yanxiang"]{--bg:#f7f2ec;--bg2:#eee5d9;--card:#fffdf8;--ink:#2c241a;--ink2:#7d7160;--ink3:#b4a893;--acc:#8a5a3b;--acc2:#f2e7da;--line:#e9dfd0;}
+[data-t="yupufei"]{--bg:#f1f6f8;--bg2:#e4edf1;--card:#fcfeff;--ink:#1c2730;--ink2:#64747e;--ink3:#a2afb7;--acc:#2e5e73;--acc2:#dfeef3;--line:#dfe7eb;}
+[data-t="wanyi"]{--bg:#f9f3f0;--bg2:#f0e4dd;--card:#fffaf6;--ink:#2d221e;--ink2:#7e6d66;--ink3:#b7a6a0;--acc:#a8563e;--acc2:#f6e4dc;--line:#ecdfd8;}
+[data-t="yueyese"]{--bg:#131519;--bg2:#1a1d23;--card:#1f232b;--ink:#e8e5df;--ink2:#989eaa;--ink3:#5a606b;--acc:#7fae95;--acc2:#29332e;--line:#2b303a;--shadow:0 6px 24px rgba(0,0,0,.35);}
+[data-t="zhuxi"]{--bg:#f3f6ef;--bg2:#e7edde;--card:#fcfef8;--ink:#212819;--ink2:#6c7560;--ink3:#a6ae99;--acc:#5a7a3d;--acc2:#e5efdb;--line:#e1e7d5;}
+[data-t="yanru"]{--bg:#f5f2ea;--bg2:#eae4d4;--card:#fffdf6;--ink:#28241b;--ink2:#746d5c;--ink3:#aca391;--acc:#6b5a2e;--acc2:#efe7d2;--line:#e6ddc9;}
+[data-t="yunniao"]{--bg:#f5f3f8;--bg2:#eae6f0;--card:#fefffe;--ink:#242130;--ink2:#6e6a7c;--ink3:#a8a3b5;--acc:#5b4e8a;--acc2:#e9e5f4;--line:#e5e1eb;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:16px}
+body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;padding-bottom:76px;transition:background .3s,color .3s}
+h1,h2,h3{font-weight:700;letter-spacing:.02em;font-family:var(--serif)}
+svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.12em}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);padding:calc(env(safe-area-inset-top) + 12px) 20px 10px;display:flex;align-items:center;justify-content:space-between}
+header .t{font-size:1.08rem;font-weight:700;font-family:var(--serif);letter-spacing:.12em}
+header .s{font-size:.72rem;color:var(--ink2);margin-top:1px}
+#btnSet{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink2);display:flex;align-items:center;justify-content:center;font-size:1.15rem;box-shadow:var(--shadow)}
+
+.wrap{padding:8px 16px 0;max-width:560px;margin:0 auto}
+
+/* now card */
+.now{background:linear-gradient(145deg,var(--acc),color-mix(in srgb,var(--acc) 70%,#000 12%));color:#fff;border-radius:26px;padding:22px 22px 18px;box-shadow:0 14px 34px color-mix(in srgb,var(--acc) 32%,transparent);position:relative;overflow:hidden}
+.now::after{content:"";position:absolute;right:-46px;top:-46px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.10)}
+.now::before{content:"";position:absolute;right:-8px;top:60px;width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.08)}
+.now .lb{font-size:.74rem;opacity:.85;display:flex;align-items:center;gap:6px}
+.now .ev{font-size:1.28rem;font-weight:700;margin:6px 0 2px;letter-spacing:.06em;font-family:var(--serif)}
+.now .dt{font-size:.8rem;opacity:.82}
+.cd{display:flex;gap:8px;margin-top:16px}
+.cd .u{flex:1;background:rgba(255,255,255,.14);backdrop-filter:blur(8px);border-radius:16px;padding:10px 0 8px;text-align:center}
+.cd .n{font-size:1.45rem;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+.cd .l{font-size:.66rem;opacity:.78;margin-top:2px}
+
+/* tabs bar */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:60;background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--line);display:flex;padding:6px 8px calc(env(safe-area-inset-bottom) + 6px)}
+.tabs button{flex:1;border:0;background:none;color:var(--ink3);font-size:.68rem;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 0;font-family:inherit;transition:color .2s}
+.tabs button svg{width:1.35rem;height:1.35rem}
+.tabs button.on{color:var(--acc);font-weight:600}
+
+/* page switch */
+.page{display:none;animation:fade .35s ease}
+.page.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.rise{opacity:0;transform:translateY(14px);animation:rise .5s ease forwards}
+@media (prefers-reduced-motion: reduce){.rise{opacity:1!important;transform:none!important;animation:none!important}}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* cards */
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);border:1px solid var(--line);padding:16px;margin-bottom:14px}
+.sec{font-size:.95rem;font-weight:700;margin:20px 4px 10px;display:flex;align-items:center;gap:7px}
+.sec svg{color:var(--acc)}
+.day-head{display:flex;align-items:baseline;gap:10px;margin:22px 4px 10px}
+.day-head .d{font-size:1.02rem;font-weight:700;font-family:var(--serif);letter-spacing:.05em}
+.day-head .w{font-size:.74rem;color:var(--ink2)}
+
+/* timeline */
+.tl{position:relative;padding-left:20px;margin-left:6px}
+.tl::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1.5px;background:var(--line)}
+.tl-i{position:relative;margin-bottom:12px}
+.tl-i::before{content:"";position:absolute;left:-19.5px;top:18px;width:8.5px;height:8.5px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 3px var(--acc2)}
+.tl-c{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:13px 15px;box-shadow:var(--shadow)}
+.tl-c .tm{font-size:.72rem;color:var(--acc);font-weight:600;font-variant-numeric:tabular-nums}
+.tl-c .nm{font-size:.95rem;font-weight:600;margin:2px 0 3px;font-family:var(--serif);letter-spacing:.03em}
+.tl-c .ds{font-size:.78rem;color:var(--ink2)}
+.tl-c .tg{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;color:var(--ink2);background:var(--bg2);border-radius:99px;padding:2px 9px;margin-top:7px}
+.fold{border-top:1px dashed var(--line);margin-top:9px;padding-top:8px;font-size:.75rem;color:var(--ink2);display:none}
+.fold.open{display:block}
+.fold b{color:var(--ink);font-weight:600}
+.more{border:0;background:none;color:var(--acc);font-size:.74rem;margin-top:6px;padding:0;font-family:inherit;display:inline-flex;align-items:center;gap:3px}
+
+/* pills */
+.pills{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 12px;scrollbar-width:none}
+.pills::-webkit-scrollbar{display:none}
+.pill{flex-shrink:0;border:1px solid var(--line);background:var(--card);color:var(--ink2);border-radius:99px;padding:7px 15px;font-size:.78rem;font-family:inherit;transition:.2s}
+.pill.on{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+
+/* spot card */
+.spot .nm{font-size:.98rem;font-weight:700;font-family:var(--serif);letter-spacing:.04em}
+.spot .sub{font-size:.74rem;color:var(--acc);margin:1px 0 6px}
+.spot .tx{font-size:.8rem;color:var(--ink2)}
+.spot .row{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.spot .tg{font-size:.68rem;color:var(--ink2);background:var(--bg2);border-radius:99px;padding:3px 10px}
+.spot .nav{display:flex;gap:8px}
+.nav-b{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:7px 12px;font-size:.74rem;font-family:inherit;display:inline-flex;align-items:center;gap:5px}
+.nav-b.pri{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+
+/* todo */
+.todo{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 15px;margin-bottom:9px;box-shadow:var(--shadow)}
+.todo input{width:20px;height:20px;accent-color:var(--acc);flex-shrink:0}
+.todo .tx{flex:1;font-size:.86rem}
+.todo.done .tx{color:var(--ink3);text-decoration:line-through}
+.todo .del{border:0;background:none;color:var(--ink3);font-size:1rem;padding:4px}
+.addrow{display:flex;gap:9px;margin-top:12px}
+.addrow input{flex:1;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:11px 14px;font-size:.85rem;color:var(--ink);font-family:inherit}
+.addrow button{border:0;background:var(--acc);color:#fff;border-radius:14px;padding:0 18px;font-size:.85rem;font-family:inherit;font-weight:600}
+
+/* tips */
+.tip{display:flex;gap:11px;align-items:flex-start}
+.tip .ic{width:34px;height:34px;border-radius:11px;background:var(--acc2);color:var(--acc);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.tip .tx{font-size:.8rem;color:var(--ink2)}
+.tip .tx b{display:block;color:var(--ink);font-size:.85rem;margin-bottom:2px;font-weight:600}
+
+/* booking */
+.bk .k{font-size:.7rem;color:var(--ink2);letter-spacing:.05em}
+.bk .v{font-size:.86rem;font-weight:600;margin:1px 0 7px}
+.bk .v a{color:var(--acc);text-decoration:none}
+.bk .v.sm{font-weight:400;color:var(--ink2);font-size:.78rem;margin-top:-5px}
+
+/* theme panel */
+.mask{position:fixed;inset:0;background:rgba(20,18,14,.4);z-index:80;opacity:0;pointer-events:none;transition:.25s}
+.mask.open{opacity:1;pointer-events:auto}
+.panel{position:fixed;left:0;right:0;bottom:0;z-index:90;background:var(--card);border-radius:28px 28px 0 0;transform:translateY(105%);transition:transform .32s cubic-bezier(.32,.72,.28,1);padding:18px 20px calc(env(safe-area-inset-bottom) + 22px);max-width:560px;margin:0 auto}
+.panel.open{transform:none}
+.panel .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.panel .hd b{font-size:.98rem}
+.panel .x{border:0;background:var(--bg2);color:var(--ink2);width:30px;height:30px;border-radius:50%;font-size:.95rem;font-family:inherit}
+.tgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.topt{position:relative;border:1.5px solid var(--line);border-radius:18px;padding:0;text-align:left;color:var(--ink);background:none;font-family:inherit;overflow:hidden;transition:.25s;min-height:86px}
+.topt .bg{position:absolute;inset:0;display:flex}
+.topt .bg i{flex:1;transition:.25s}
+.topt .nm{position:absolute;left:12px;bottom:10px;font-family:var(--serif);font-size:.95rem;letter-spacing:.15em;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.45);z-index:1}
+.topt .nm i{display:block;font-size:.62rem;letter-spacing:.05em;opacity:.85;font-style:normal;font-family:-apple-system,sans-serif;margin-top:2px}
+.topt.on{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc),var(--shadow);transform:scale(.98)}
+.topt.on::after{content:"";position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;background:var(--acc) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3'%3E%3Cpath d='M5 13l4 4L19 7'/%3E%3C/svg%3E") center/12px no-repeat}
+
+/* === 车票卡片 === */
+.tkt{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden}
+.tkt .tp{display:flex;padding:14px 16px 10px;gap:12px;align-items:center}
+.tkt .st{text-align:center;width:34%}
+.tkt .st .t1{font-family:var(--serif);font-size:1.05rem;font-weight:700}
+.tkt .st .t2{font-size:.72rem;color:var(--acc);font-weight:700;font-variant-numeric:tabular-nums;margin-top:2px}
+.tkt .arr{flex:1;text-align:center;color:var(--ink3);font-size:.68rem}
+.tkt .arr .dur{border:1px solid var(--line);border-radius:99px;padding:2px 10px;display:inline-block;margin-top:3px}
+.tkt .dt{border-top:1px dashed var(--line);padding:9px 16px;display:flex;flex-wrap:wrap;gap:4px 16px;font-size:.7rem;color:var(--ink2)}
+.tkt .dt b{color:var(--ink);font-weight:600}
+.tkt .badge{position:absolute;top:0;right:0;background:var(--acc2);color:var(--acc);font-size:.62rem;padding:3px 10px;border-radius:0 16px 0 12px;font-weight:600}
+.tkt::after,.tkt::before{content:"";position:absolute;top:calc(100% - 42px - 9px);width:16px;height:16px;border-radius:50%;background:var(--bg);border:1px solid var(--line)}
+.tkt::before{left:-9px}.tkt::after{right:-9px}
+body[data-fx="off"] .fx,body[data-fx="off"] .ripple,body[data-fx="off"] #wave{display:none!important}
+body[data-fx="off"] .card:active,body[data-fx="off"] .tl-c:active{transform:none}
+.fxoff-row{display:flex;align-items:center;justify-content:space-between;padding:12px 4px;border-top:1px solid var(--line);margin-top:12px}
+.fxoff-row .tx b{display:block;font-size:.85rem}
+.fxoff-row .tx span{font-size:.7rem;color:var(--ink2)}
+.sw{position:relative;width:44px;height:26px;border-radius:99px;background:var(--bg2);border:1px solid var(--line);transition:.25s;flex-shrink:0}
+.sw.on{background:var(--acc)}
+.sw i{position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.2);transition:.25s}
+.sw.on i{left:20px}
+.empty{text-align:center;color:var(--ink3);font-size:.8rem;padding:30px 0}
+@media(min-width:600px){.wrap{max-width:600px}}
+
+/* === 主题特效层 === */
+.tabs{position:fixed!important;bottom:0!important;z-index:60!important}
+.fx{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+body{position:relative}
+.wrap,header,.wrap>*,header{position:relative;z-index:1}
+/* 九曲: 缓缓上升的气泡(溪水) */
+.fx i{position:absolute;bottom:-20px;border-radius:50%;background:currentColor;opacity:.12;animation:fxup linear infinite}
+[data-t="yiqu"] .fx{color:#4a6b57}
+[data-t="yiqu"] .fx i{width:10px;height:10px;box-shadow:inset -2px -2px 4px rgba(255,255,255,.4)}
+@keyframes fxup{from{transform:translateY(0)}to{transform:translateY(-110vh)}}
+/* 岩香: 茶烟袅袅(细长雾丝上飘) */
+[data-t="yanxiang"] .fx{color:#8a5a3b}
+[data-t="yanxiang"] .fx i{width:3px;height:70px;border-radius:99px;filter:blur(4px);opacity:.1;animation:fxsmoke linear infinite}
+@keyframes fxsmoke{0%{transform:translateY(0) scaleX(1);opacity:0}15%{opacity:.14}100%{transform:translateY(-100vh) scaleX(2.2);opacity:0}}
+/* 玉瀑飞: 斜落雨丝 */
+[data-t="yupufei"] .fx{color:#2e5e73}
+[data-t="yupufei"] .fx i{width:1.5px;height:26px;border-radius:2px;opacity:.15;animation:fxrain linear infinite}
+@keyframes fxrain{from{transform:translateY(-10vh) translateX(0)}to{transform:translateY(110vh) translateX(-6vw)}}
+/* 晚照: 缓移光斑 */
+[data-t="wanyi"] .fx{color:#a8563e}
+[data-t="wanyi"] .fx i{width:160px;height:160px;filter:blur(50px);opacity:.13;border-radius:50%;animation:fxglow ease-in-out infinite alternate}
+@keyframes fxglow{from{transform:translate(0,0) scale(1)}to{transform:translate(-14vw,8vh) scale(1.35)}}
+/* 月夜色: 萤火 + 月晕 */
+[data-t="yueyese"] .fx{color:#cfe3a8}
+[data-t="yueyese"] .fx i{width:4px;height:4px;box-shadow:0 0 8px 2px currentColor;opacity:.5;animation:fxfire linear infinite}
+@keyframes fxfire{0%{transform:translateY(0);opacity:0}20%{opacity:.6}50%{transform:translateY(-45vh) translateX(3vw);opacity:.25}100%{transform:translateY(-95vh);opacity:0}}
+/* 竹溪: 摇曳竹叶(旋转飘落) */
+[data-t="zhuxi"] .fx{color:#5a7a3d}
+[data-t="zhuxi"] .fx i{width:14px;height:7px;border-radius:80% 20% 80% 20%;opacity:.16;animation:fxleaf linear infinite}
+@keyframes fxleaf{0%{transform:translateY(-8vh) rotate(0)}100%{transform:translateY(110vh) rotate(560deg)}}
+/* 岩乳: 缓慢沉降茶尘 */
+[data-t="yanru"] .fx{color:#6b5a2e}
+[data-t="yanru"] .fx i{width:5px;height:5px;filter:blur(1px);opacity:.14;animation:fxdust linear infinite}
+@keyframes fxdust{from{transform:translateY(-5vh)}to{transform:translateY(108vh)}}
+/* 云鸟: 流云横移 */
+[data-t="yunniao"] .fx{color:#5b4e8a}
+[data-t="yunniao"] .fx i{width:120px;height:36px;filter:blur(24px);border-radius:99px;opacity:.12;animation:fxcloud linear infinite}
+@keyframes fxcloud{from{transform:translateX(-20vw)}to{transform:translateX(110vw)}}
+
+/* === 主题字体性格 === */
+[data-t="yanxiang"] header .t,[data-t="yanxiang"] .now .ev,[data-t="yanru"] header .t,[data-t="yanru"] .now .ev{letter-spacing:.3em;padding-left:.15em}
+[data-t="yueyese"] header .t{letter-spacing:.5em;padding-left:.25em;font-weight:600}
+[data-t="yunniao"] header .t{font-style:italic}
+[data-t="wanyi"] header .t{letter-spacing:.2em}
+h1,h2,h3,.day-head .d{font-family:var(--serif)}
+
+/* === 长按彩蛋: 触点涟漪 === */
+.ripple{position:fixed;width:14px;height:14px;border-radius:50%;border:2px solid var(--acc);pointer-events:none;z-index:99;animation:rip .6s ease-out forwards}
+@keyframes rip{from{opacity:.5;transform:scale(1)}to{opacity:0;transform:scale(4)}}
+
+/* === 倒计时翻动 === */
+.cd .n{transition:transform .1s}
+.cd .n.tick{transform:translateY(-2px)}
+
+/* === 卡片按压反馈 === */
+.card:active,.tl-c:active{transform:scale(.985);transition:transform .12s}
+
+/* === 主题切换全屏水波过场 === */
+#wave{position:fixed;inset:0;z-index:98;pointer-events:none;background:radial-gradient(circle at var(--wx,50%) var(--wy,50%),var(--acc) 0%,transparent 60%);opacity:0;transform:scale(0)}
+#wave.go{animation:wavego .55s ease-out}
+@keyframes wavego{0%{opacity:.35;transform:scale(0)}100%{opacity:0;transform:scale(2.6)}}
+/* === 拉满特效: 视差顶部光泽 === */
+header::after{content:"";position:absolute;left:-30%;top:0;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.25),transparent);animation:shimmer 6s ease-in-out infinite;pointer-events:none}
+@keyframes shimmer{0%,100%{left:-30%}50%{left:110%}}
+body[data-fx="off"] header::after{display:none}
+/* === 倒计时数字滚动渐变 === */
+.now{background-size:200% 200%;animation:gradMove 8s ease infinite}
+@keyframes gradMove{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+body[data-fx="off"] .now{animation:none}
+/* === tab图标激活弹跳 === */
+.tabs button.on svg{animation:tabPop .35s cubic-bezier(.34,1.56,.64,1)}
+@keyframes tabPop{0%{transform:scale(.7)}100%{transform:scale(1)}}
+body[data-fx="off"] .tabs button.on svg{animation:none}
+/* === 磁吸导航: 选中项微微上浮 === */
+.tabs button{transition:color .2s,transform .25s}
+.tabs button.on{transform:translateY(-3px)}
+body[data-fx="off"] .tabs button.on{transform:none}
+/* === 滚动进度细线(顶部) === */
+#sbar{position:fixed;top:0;left:0;height:2.5px;background:linear-gradient(90deg,var(--acc),color-mix(in srgb,var(--acc) 40%,#fff));width:0;z-index:95;transition:width .08s linear;border-radius:0 99px 99px 0}
+</style>
+</head>
+<body data-t="linen">
+
+<header>
+  <div><div class="t">武夷问茶</div><div class="s">甲辰秋 · 十月廿四至廿七 · 四日三宿</div></div>
+  <button id="btnSet" aria-label="设置"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+</header>
+
+<div id="sbar"></div>
+<div class="fx" id="fx"></div>
+<div id="wave"></div>
+<div class="wrap">
+
+  <!-- 行至何处 -->
+  <div class="now rise" style="animation-delay:.02s">
+    <div class="lb"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>行至何处</div>
+    <div class="ev" id="nowTitle">—</div>
+    <div class="dt" id="nowDate">—</div>
+    <div class="cd">
+      <div class="u"><div class="n" id="cdD">--</div><div class="l">天</div></div>
+      <div class="u"><div class="n" id="cdH">--</div><div class="l">时</div></div>
+      <div class="u"><div class="n" id="cdM">--</div><div class="l">分</div></div>
+      <div class="u"><div class="n" id="cdS">--</div><div class="l">秒</div></div>
+    </div>
+  </div>
+
+  <!-- ================= 行程 ================= -->
+  <div class="page on" id="page-trip">
+<div id="tripList"></div>
+  </div>
+
+  <!-- ================= 吃住 ================= -->
+  <div class="page" id="page-food">
+    <div class="sec"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 12h18M9 6v13" stroke-dasharray="2 2"/></svg>两张车票</div>
+    <div class="tkt rise"><span class="badge">去程</span>
+      <div class="tp">
+        <div class="st"><div class="t1">泉州南</div><div class="t2">09:47</div></div>
+        <div class="arr">G984<div class="dur">2h10m</div></div>
+        <div class="st"><div class="t1">南平市</div><div class="t2">11:57</div></div>
+      </div>
+      <div class="dt"><span><b>10月24日</b> 周六</span><span>二等座 <b>08车13C</b></span><span>195.5元</span><span>EGW5952629</span></div>
+    </div>
+    <div class="tkt rise"><span class="badge">返程</span>
+      <div class="tp">
+        <div class="st"><div class="t1">南平市</div><div class="t2">14:46</div></div>
+        <div class="arr">D6241<div class="dur">3h06m</div></div>
+        <div class="st"><div class="t1">晋江</div><div class="t2">17:52</div></div>
+      </div>
+      <div class="dt"><span><b>10月27日</b> 周二</span><span>二等座 <b>02车16B</b> 静音</span><span>148.5元</span><span>E6W0105466</span></div>
+    </div>
+
+    <div class="sec" style="margin-top:14px"><svg class="i" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>栖居</div>
+    <div class="card bk rise" style="animation-delay:.05s">
+      <div class="k">酒店</div>
+      <div class="v">嘉元千禧度假酒店</div>
+      <div class="v sm">大王峰南路106号 · 10月24日入住 / 10月27日退房</div>
+      <div class="v"><a href="tel:05996077777">0599-6077777</a></div>
+      <div class="v sm">酒店带泳池与健身房，记得带泳衣；行李可寄存前台</div>
+      <div class="k" style="margin-top:10px">去程高铁 · 10.24 周六</div>
+      <div class="v">G984 泉州南 09:47 → 南平市 11:57</div>
+      <div class="v sm">二等座 08车13C号 · 195.5元（9.1折）· 订单 EGW5952629</div>
+      <div class="v sm">候车：09:00 泉州南站1号检票口集合</div>
+      <div class="k" style="margin-top:10px">返程高铁 · 10.27 周二</div>
+      <div class="v">D6241 南平市 14:46 → 晋江 17:52</div>
+      <div class="v sm">二等座 02车16B号 · 静音车厢 · 148.5元（9.5折）· 订单 E6W0105466</div>
+      <div class="v sm">12306「本人车票」出示二维码检票，无需取票</div>
+      <div class="k" style="margin-top:10px">带队联系</div>
+      <div class="v"><a href="tel:15960777991">黄火冷 15960777991</a> · <a href="tel:18905957757">陈小清 18905957757</a></div>
+    </div>
+
+    <div class="sec"><svg class="i" viewBox="0 0 24 24"><path d="M6 2v9a3 3 0 0 0 3 3v8M9 2v5M12 2v5M9 14V9"/></svg>人间至味</div>
+    <div class="pills" id="foodPills"></div>
+    <div id="foodList"></div>
+  </div>
+
+  <!-- ================= 景点 ================= -->
+  <div class="page" id="page-spot">
+    <div class="sec" style="margin-top:14px"><svg class="i" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>山水册</div>
+    <div class="pills" id="spotPills"></div>
+    <div id="spotList"></div>
+  </div>
+
+  <!-- ================= 待办 ================= -->
+  <div class="page" id="page-todo">
+    <div class="sec" style="margin-top:14px"><svg class="i" viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>行囊录</div>
+    <div id="todoList"></div>
+    <div class="addrow"><input id="todoInp" placeholder="添一事…"><button id="todoAdd">记下</button></div>
+  </div>
+
+  <!-- ================= 实用贴 ================= -->
+  <div class="page" id="page-tip">
+    <div class="sec" style="margin-top:14px"><svg class="i" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.7 1.3 1.5 1.5 2.5h5c.2-1 .7-1.8 1.5-2.5A6 6 0 0 0 12 3z"/></svg>锦囊集</div>
+    <div id="tipList"></div>
+    <div class="sec"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M4 13h16"/></svg>随身雅物</div>
+    <div id="packList"></div>
+  </div>
+
+</div>
+
+<!-- 底部Tab -->
+<nav class="tabs">
+  <button class="on" data-p="trip"><svg class="i" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>行迹</button>
+  <button data-p="spot"><svg class="i" viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>探幽</button>
+  <button data-p="todo"><svg class="i" viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>行囊</button>
+  <button data-p="food"><svg class="i" viewBox="0 0 24 24"><path d="M6 2v9a3 3 0 0 0 3 3v8M9 2v5M12 2v5M9 14V9M17 2c-1.5 2-2 4-2 7h2v13M17 2v22"/></svg>烟火</button>
+  <button data-p="tip"><svg class="i" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.7 1.3 1.5 1.5 2.5h5c.2-1 .7-1.8 1.5-2.5A6 6 0 0 0 12 3z"/></svg>锦囊</button>
+</nav>
+
+<!-- 主题面板 -->
+<div class="mask" id="mask"></div>
+<div class="panel" id="panel">
+  <div class="hd"><b>择一山水</b><button class="x" id="panelX">✕</button></div>
+  <div class="tgrid" id="tgrid"></div>
+  <div class="fxoff-row"><div class="tx"><b>沉浸特效</b><span>粒子·水波·光泽·动效总开关</span></div><div class="sw" id="fxSw"><i></i></div></div>
+</div>
+
+<script>
+"use strict";
+window.onerror=function(m,u,l){var d=document.getElementById("errbox");if(!d){d=document.createElement("div");d.id="errbox";d.style.cssText="position:fixed;top:0;left:0;right:0;background:#c0392b;color:#fff;font-size:11px;padding:4px 8px;z-index:999";document.body.appendChild(d);}d.textContent="ERR:"+m+" @"+l;};
+/* ===== 数据 ===== */
+const Y=2026;
+const SCHEDULE=[
+ {d:'10月24日',w:'星期六 · Day 1',ev:[
+  ['08:15','签到集合','地税局对面「阿杜沙茶面」门口，点名后统一出发','集合'],
+  ['09:00','泉州南站候车','1号检票口集合（自行抵达）','交通'],
+  ['09:47','G984 高铁','泉州南 → 南平市，车程约2小时10分','交通'],
+  ['12:30','抵达 · 午餐','乘车前往武夷山度假区，团队午餐','餐饮'],
+  ['14:00','入住 · 休整','嘉元千禧度假酒店办理入住，稍作休息','住宿'],
+  ['16:00','大红袍景区','母树大红袍观景步道，岩骨花香慢游道徒步','景点'],
+  ['18:30','晚餐','团队晚餐','餐饮'],
+  ['19:30','崇溪漫步道','溪畔夜景自由漫步','自由'],
+ ]},
+ {d:'10月25日',w:'星期日 · Day 2',ev:[
+  ['08:00','早餐','酒店自助早餐','餐饮'],
+  ['09:00','九曲溪竹筏漂流','约90分钟，筏工小费惯例每人20元（自备现金）','景点'],
+  ['11:30','午餐','景区周边团队午餐','餐饮'],
+  ['13:30','一线天','全国最长岩缝，最窄处约30cm，背包提前侧放','景点'],
+  ['16:00','返回酒店','自由休整','自由'],
+  ['19:00','印象大红袍演出','山水实景演出约70分钟，夜间温差大带外套','演出'],
+ ]},
+ {d:'10月26日',w:'星期一 · Day 3',ev:[
+  ['08:00','早餐','酒店自助早餐','餐饮'],
+  ['09:00','天游峰','武夷山精华，848级石阶登顶俯瞰九曲溪，量力而行','景点'],
+  ['12:00','午餐','山下游客中心附近','餐饮'],
+  ['14:00','茶艺教习','武夷岩茶冲泡教学与品鉴','活动'],
+  ['17:00','自由活动','度假区自由探索（可逛宋街、三姑老街）','自由'],
+  ['18:30','晚餐','团队晚餐','餐饮'],
+ ]},
+ {d:'10月27日',w:'星期二 · Day 4',ev:[
+  ['08:00','早餐 · 收拾行李','退房前整理随身物品','日程'],
+  ['09:00','虎啸岩','岩顶视野开阔，往返约2小时缓步路线','景点'],
+  ['11:30','午餐','团队午餐后集合','餐饮'],
+  ['13:30','乘车赴南平市站','约1小时车程','交通'],
+  ['14:46','D6241 返程','南平市 → 晋江 17:52，散团','交通'],
+ ]},
+];
+const SPOTS=[
+ {n:'大红袍景区',a:'北部片区',s:'岩骨花香慢游道',t:'约2小时',x:'六株母树大红袍生于九龙窠崖壁，是武夷岩茶的精神图腾。步道平缓好走，沿途摩崖石刻密集，茶香伴随溪谷清风，适合下午慢慢走。',g:'Dahongpao+Scenic+Area',a2:'武夷山大红袍景区'},
+ {n:'九曲溪竹筏漂流',a:'核心片区',s:'武夷山必玩第一名片',t:'约90分钟',x:'乘竹筏顺九曲溪而下，两岸三十六峰九十九岩次第展开，筏工会讲解沿途传说。出发前上洗手间，全程无法中途下筏，手机挂绳防泼溅。',g:'Jiuqu+Stream+Bamboo+Rafting',a2:'武夷山九曲溪竹筏码头'},
+ {n:'一线天',a:'南部片区',s:'全国最狭长岩缝',t:'约1小时',x:'岩缝最窄处仅约30厘米，体型高大者需侧身缓行，洞内湿滑光线暗。建议背包侧背、手机收好，有幽闭不适者可走旁边灵岩支线。',g:'Yixiantian+Wuyishan',a2:'武夷山一线天景区'},
+ {n:'印象大红袍',a:'度假区',s:'张艺谋山水实景演出',t:'约70分钟',x:'以大王峰为幕、茶田为台的大型实景演出，旋转观众席随剧情转动。夜间山风明显务必带外套，场内可买姜茶暖身。',g:'Impression+DaHongPao',a2:'印象大红袍剧场'},
+ {n:'天游峰',a:'核心片区',s:'武夷山第一胜景',t:'约3小时',x:'848级石阶登顶后九曲溪全景一览无余，是武夷山最经典机位。台阶较陡建议放缓节奏，下山可走隐屏峰环线回，全程约3小时。',g:'Tianyou+Peak',a2:'武夷山天游峰'},
+ {n:'虎啸岩',a:'南部片区',s:'巨岩轰鸣之声得名',t:'约2小时',x:'岩顶视野开阔，定命桥悬崖景观刺激但护栏完善。坡度较缓适合收尾日体力分配，好汉坡段略陡可绕行。',g:'Huxiao+Rock',a2:'武夷山虎啸岩'},
+ {n:'崇溪漫步道',a:'度假区',s:'夜色溪畔慢生活',t:'约40分钟',x:'度假区旁溪畔步道，夜景灯光柔和，散步消食的绝佳去处。沿途有小酒馆与茶室，夜风凉爽，适合晚间自由活动。',g:'Chongxi+Wuyishan',a2:'武夷山崇溪漫步道'},
+ {n:'宋街',a:'度假区',s:'仿宋风情商业街',t:'约1小时',x:'紧邻武夷宫，青瓦木构店铺林立，可淘茶器与伴手礼。价格弹性大，购买前先比价，特产建议回程前统一采购。',g:'Song+Street+Wuyishan',a2:'武夷山宋街'},
+];
+const ICONS={
+ 'i-cam':'<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>',
+ 'i-hike':'<path d="M12 2v20M12 6l4-2M12 6L8 4M5 22l7-10 7 10"/>',
+ 'i-rain':'<path d="M20 16a4 4 0 0 0-1-7.9A5.5 5.5 0 0 0 8 9a4.5 4.5 0 0 0-1 8.9M8 19l-1 3M12 19l-1 3M16 19l-1 3"/>',
+ 'i-clock':'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>',
+ 'i-warn':'<path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/>',
+ 'i-cash':'<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2"/>'
+};
+const TIPS=[
+ ['i-cam','拍照机位','九曲溪最佳机位在玉女峰至二曲段；天游峰顶右侧岩石群是经典俯瞰点，早上顺光。'],
+ ['i-hike','登山节奏','天游峰848级台阶，速度放慢、小口补水；体力弱者可在山脚茶室等候，不必勉强登顶。'],
+ ['i-rain','雨天预案','小雨漂流照常（发雨衣）；大雨则漂流/登山改为博物馆+香江茗苑茶文化观光园。'],
+ ['i-clock','营业时间','景区 usual 07:00-17:30；印象大红袍晚间开演；度假区早餐店多数 07:00 后营业。'],
+ ['i-warn','避坑提醒','不要在景区门口买「武夷山特产」茶叶，价格虚高；买茶认准正规茶庄并索要价格清单。'],
+ ['i-cash','现金准备','竹筏筏工小费惯例每人20元现金，请提前备好零钱，漂流码头上无法取款。'],
+];
+const PACK=['身份证/车票','现金零钱（筏工小费20元）','登山鞋/防滑运动鞋','薄外套（早晚温差大）','雨伞/雨衣','防晒霜+遮阳帽','充电宝','手机挂绳（漂流用）','保温杯','常用药（创可贴/晕车药）'];
+const INIT_TODO=['10月20日17:00前报同住意向','确认高铁车票信息','准备20元现金零钱','检查身份证有效期','下载离线地图','准备登山鞋与薄外套','给家里备好常用药品','买手机防水挂绳','设置行程提醒'];
+/* ===== 美食数据 ===== */
+const FOODS=[
+ {n:'岚谷熏鹅',a:'必吃硬菜',s:'省级非遗 · 武夷山宴席头牌',x:'糯米与茶叶熏制的土鹅，表皮焦香、辣味渗透每一丝鹅肉，越嚼越香。本地人宴席必上，买真空装还能带回家。',q:'岚谷婆媳熏鹅',g:'岚谷婆媳(武夷山)',r:'¥40-60/只·可真空'},
+ {n:'稻花鱼/溪鱼',a:'必吃硬菜',s:'稻田与溪流里的鲜',x:'武夷山稻田养的稻花鱼和九曲溪溪鱼，肉质清甜无泥腥味，多为清蒸或炖汤，岩茶餐厅基本都有。',q:'稻花鱼 武夷山',g:'碧湖园湖景餐厅',r:'¥88/人·闽菜4.5分'},
+ {n:'武夷光饼',a:'街头小吃',s:'百年炭烤小饼',x:'炭火烤制的咸香小饼，夹肉夹菜都好吃，刚出炉的最好吃。三姑老街和度假区街边都有现烤摊。',q:'武夷光饼',g:'三姑老街光饼摊',r:'¥3-5/个'},
+ {n:'紫溪粉',a:'街头小吃',s:'本地人早餐首选',x:'米粉Q弹，配以瘦肉、猪肝等浇头，汤头鲜。度假区早餐店和三姑市场周边都有，配根油条就是地道一顿。',q:'紫溪粉 武夷山',g:'三姑老街早餐店',r:'¥10-15/碗'},
+ {n:'文公菜',a:'特色菜',s:'纪念朱熹的传统菜',x:'相传朱熹待客菜，五花肉与香菇等蒸制，层层叠起寓意书香传承。部分老字号闽菜馆可点。',q:'文公菜 武夷山',g:'大三碗酒家(蛇博园店)',r:'高德必吃榜'},
+ {n:'山茶油炒土鸡',a:'特色菜',s:'高德必吃榜上榜',x:'本地山茶油大火炒制土鸡，油香四溢肉质紧实，醉得意是高德2025必吃榜收录门店。',q:'醉得意 山茶油炒土鸡',g:'醉得意·山茶油炒土鸡(武夷山店)',r:'高德必吃榜'},
+ {n:'茶宴/岩茶入菜',a:'特色菜',s:'茶香入馔的创意菜',x:'用大红袍入菜的创意闽菜：茶香排骨、岩茶红烧肉、茶叶蛋等。嘉元千禧和中高档酒店餐厅都能吃到。',q:'武夷山 茶宴',g:'椿泊度假酒店·品崇安餐厅',r:'¥163/人·闽菜4.4分'},
+ {n:'外卖/夜宵',a:'宵夜外卖',s:'度假区外卖覆盖情况',x:'度假区外卖以美团/饿了么为主，酒店周边1-3公里多有配送；演出晚归可在酒店前台或平台点夜宵粥粉。',q:'武夷山度假区 外卖',g:'度假区酒店周边',r:'美团/饿了么'},
+];
+const foodPills=document.getElementById('foodPills'),foodList=document.getElementById('foodList');
+function renderFoods(a){
+  foodList.innerHTML='';
+  FOODS.filter(f=>a==='全部'||f.a===a).forEach((f,i)=>{
+    const c=document.createElement('div');c.className='card spot rise';c.style.animationDelay=(i*.05)+'s';
+    c.innerHTML=`<div class="nm">${f.n}</div><div class="sub">${f.s}</div><div class="tx">${f.x}</div>
+      <div class="row"><span class="tg">${f.r}</span>
+      <div class="nav">
+        <button class="nav-b pri" data-g="${f.g}"><svg class="i" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>导航</button>
+        <button class="nav-b" data-q="${encodeURIComponent(f.q)}"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>搜点评</button>
+      </div></div>`;
+    c.querySelector('.pri').onclick=()=>location.href='https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(f.g);
+    c.querySelector('.nav-b:not(.pri)').onclick=()=>location.href='https://www.dianping.com/search/keyword/1/10_'+f.q;
+    foodList.appendChild(c);
+  });
+}
+const fAreas=['全部',...new Set(FOODS.map(f=>f.a))];
+fAreas.forEach((a,i)=>{
+  const p=document.createElement('button');p.className='pill'+(i===0?' on':'');p.textContent=a;
+  p.onclick=()=>{foodPills.querySelectorAll('.pill').forEach(x=>x.classList.remove('on'));p.classList.add('on');renderFoods(a);};
+  foodPills.appendChild(p);
+});
+renderFoods('全部');
+
+const THEMES=[
+ ['yiqu','九曲','#4a6b57','#e7efe8','#f6f4ef','溪水绿·默认'],
+ ['yanxiang','岩香','#8a5a3b','#f2e7da','#f7f2ec','焙火茶汤'],
+ ['yupufei','玉瀑飞','#2e5e73','#dfeef3','#f1f6f8','山涧水蓝'],
+ ['wanyi','晚照','#a8563e','#f6e4dc','#f9f3f0','丹霞暮色'],
+ ['yueyese','月夜色','#7fae95','#29332e','#131519','夜宿山中'],
+ ['zhuxi','竹溪','#5a7a3d','#e5efdb','#f3f6ef','竹筏翠色'],
+ ['yanru','岩乳','#6b5a2e','#efe7d2','#f5f2ea','岩韵茶褐'],
+ ['yunniao','云鸟','#5b4e8a','#e9e5f4','#f5f3f8','云海雾紫'],
+];
+
+/* ===== 倒计时 ===== */
+function nextEvent(){
+  const now=new Date(); const list=[];
+  SCHEDULE.forEach(day=>day.ev.forEach(e=>{
+    const [mo,dd]=day.d.match(/(\d+)月(\d+)日/).slice(1).map(Number);
+    const [h,m]=e[0].split(':').map(Number);
+    const t=new Date(Y,mo-1,dd,h,m);
+    if(t>now) list.push({t,name:e[1],desc:e[2],d:day.d});
+  }));
+  return list[0]||null;
+}
+function tick(){
+  const ne=nextEvent();
+  if(!ne){['cdD','cdH','cdM','cdS'].forEach(i=>document.getElementById(i).textContent='0');
+    document.getElementById('nowTitle').textContent='旅程圆满结束';document.getElementById('nowDate').textContent='期待下次同行';return;}
+  document.getElementById('nowTitle').textContent=ne.name;
+  document.getElementById('nowDate').textContent=ne.d+' '+ne.t+' · '+ne.desc;
+  let s=Math.floor((ne.t-new Date())/1000);
+  const d=Math.floor(s/86400); s%=86400; const h=Math.floor(s/3600); s%=3600; const m=Math.floor(s/60); s%=60;
+  document.getElementById('cdD').textContent=d; document.getElementById('cdH').textContent=String(h).padStart(2,'0');
+  document.getElementById('cdM').textContent=String(m).padStart(2,'0'); document.getElementById('cdS').textContent=String(s).padStart(2,'0');
+}
+tick(); setInterval(tick,1000);
+
+/* ===== 行程渲染 ===== */
+const tripList=document.getElementById('tripList');
+SCHEDULE.forEach((day,di)=>{
+  const h=document.createElement('div');h.className='day-head rise';h.style.animationDelay=(di*.06)+'s';
+  h.innerHTML=`<span class="d">${day.d}</span><span class="w">${day.w}</span>`;
+  const tl=document.createElement('div');tl.className='tl rise';tl.style.animationDelay=(di*.06+.03)+'s';
+  day.ev.forEach(e=>{
+    const it=document.createElement('div');it.className='tl-i';
+    it.innerHTML=`<div class="tl-c"><span class="tm">${e[0]}</span><div class="nm">${e[1]}</div><div class="ds">${e[2]}</div><span class="tg">${e[3]}</span><button class="more">展开<svg class="i" viewBox="0 0 24 24" style="font-size:.65rem"><path d="M6 9l6 6 6-6"/></svg></button><div class="fold"><b>提示：</b>具体时间以现场导游安排为准；建议提前10分钟到场集合。雨天或特殊情况听统一调度。</div></div>`;
+    it.querySelector('.more').onclick=()=>{const f=it.querySelector('.fold');f.classList.toggle('open');};
+    tl.appendChild(it);
+  });
+  tripList.appendChild(h);tripList.appendChild(tl);
+});
+
+/* ===== 景点渲染 ===== */
+const areas=['全部',...new Set(SPOTS.map(s=>s.a))];
+const spotPills=document.getElementById('spotPills'),spotList=document.getElementById('spotList');
+function renderSpots(a){
+  spotList.innerHTML='';
+  SPOTS.filter(s=>a==='全部'||s.a===a).forEach((s,i)=>{
+    const c=document.createElement('div');c.className='card spot rise';c.style.animationDelay=(i*.05)+'s';
+    c.innerHTML=`<div class="nm">${s.n}</div><div class="sub">${s.s}</div><div class="tx">${s.x}</div>
+      <div class="row"><span class="tg">${s.t}</span>
+      <div class="nav">
+        <button class="nav-b pri" data-q="${encodeURIComponent(s.g)}"><svg class="i" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>导航</button>
+        <button class="nav-b" data-q="${encodeURIComponent(s.a2)}"><svg class="i" viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Apple</button>
+      </div></div>`;
+    c.querySelector('.pri').onclick=()=>location.href='https://www.google.com/maps/dir/?api=1&destination='+s.g;
+    c.querySelector('.nav-b:not(.pri)').onclick=()=>location.href='maps://?daddr='+encodeURIComponent(s.a2);
+    spotList.appendChild(c);
+  });
+}
+areas.forEach((a,i)=>{
+  const p=document.createElement('button');p.className='pill'+(i===0?' on':'');p.textContent=a;
+  p.onclick=()=>{spotPills.querySelectorAll('.pill').forEach(x=>x.classList.remove('on'));p.classList.add('on');renderSpots(a);};
+  spotPills.appendChild(p);
+});
+renderSpots('全部');
+
+/* ===== 待办 ===== */
+const KEY='wys_todo';
+let todos=JSON.parse(localStorage.getItem(KEY)||'null')||INIT_TODO.map((t,i)=>({t,d:false,id:i}));
+const save=()=>localStorage.setItem(KEY,JSON.stringify(todos));
+const todoList=document.getElementById('todoList');
+function renderTodos(){
+  todoList.innerHTML='';
+  todos.forEach((td,i)=>{
+    const r=document.createElement('div');r.className='todo'+(td.d?' done':'');
+    r.innerHTML=`<input type="checkbox" ${td.d?'checked':''}><span class="tx">${td.t}</span><button class="del" aria-label="删除"><svg class="i" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg></button>`;
+    r.querySelector('input').onchange=e=>{todos[i].d=e.target.checked;save();renderTodos();};
+    r.querySelector('.del').onclick=()=>{todos.splice(i,1);save();renderTodos();};
+    todoList.appendChild(r);
+  });
+}
+document.getElementById('todoAdd').onclick=()=>{const v=todoInp.value.trim();if(!v)return;todos.push({t:v,d:false});todoInp.value='';save();renderTodos();};
+document.getElementById('todoInp').onkeydown=e=>{if(e.key==='Enter')document.getElementById('todoAdd').click();};
+renderTodos();
+
+/* ===== 实用贴 & 清单 ===== */
+const tipList=document.getElementById('tipList');
+TIPS.forEach((t,i)=>{
+  const c=document.createElement('div');c.className='card rise';c.style.animationDelay=(i*.04)+'s';
+  c.innerHTML=`<div class="tip"><div class="ic"><svg class="i" viewBox="0 0 24 24">${ICONS[t[0]]||""}</svg></div><div class="tx"><b>${t[1]}</b>${t[2]}</div></div>`;
+  tipList.appendChild(c);
+});
+const packList=document.getElementById('packList');
+PACK.forEach((p,i)=>{
+  const r=document.createElement('div');r.className='todo rise';r.style.animationDelay=(i*.03)+'s';
+  r.innerHTML=`<input type="checkbox"><span class="tx">${p}</span>`;
+  const cb=r.querySelector('input');cb.checked=localStorage.getItem('wys_pack'+i)==='1';
+  cb.onchange=()=>localStorage.setItem('wys_pack'+i,cb.checked?'1':'0');
+  packList.appendChild(r);
+});
+
+/* ===== Tab 切换(事件委托,最早绑定) ===== */
+function switchTab(btn){
+  if(!btn||!btn.dataset||!btn.dataset.p)return;
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
+  btn.classList.add('on');
+  const pg=document.getElementById('page-'+btn.dataset.p);
+  if(pg){pg.classList.add('on');
+    pg.querySelectorAll('.rise').forEach(el=>{el.style.animation='none';void el.offsetHeight;el.style.animation='';});}
+  window.scrollTo(0,0);
+}
+document.addEventListener('click',function(e){
+  const b=e.target.closest('.tabs button');
+  if(b)switchTab(b);
+},true);
+
+
+
+/* ===== 彩蛋: 点击标题5下出现诗笺 ===== */
+let tCount=0;
+document.querySelector('header .t').addEventListener('click',()=>{
+  if(++tCount<5)return;tCount=0;
+  const q=document.createElement('div');
+  q.style.cssText='position:fixed;inset:0;z-index:97;display:flex;align-items:center;justify-content:center;background:rgba(15,14,10,.45);backdrop-filter:blur(6px)';
+  q.innerHTML=`<div style="background:var(--card);border-radius:22px;padding:34px 30px;max-width:320px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+    <div style="font-family:var(--serif);font-size:1.2rem;letter-spacing:.25em;color:var(--acc);margin-bottom:14px">武夷山中</div>
+    <div style="font-family:var(--serif);font-size:.95rem;line-height:2.1;color:var(--ink2)">曲曲山回转，峰峰水抱流。<br>一曲一湾秀，峰峰水抱流。</div>
+    <div style="font-size:.72rem;color:var(--ink3);margin-top:16px">—— 连点五下的人，是有缘人</div>
+    <button onclick="this.closest('div').parentElement.remove()" style="margin-top:18px;border:0;background:var(--acc2);color:var(--acc);border-radius:99px;padding:8px 26px;font-family:inherit;font-size:.8rem">合上</button></div>`;
+  document.body.appendChild(q);q.onclick=e=>{if(e.target===q)q.remove();};
+});
+
+/* ===== 滚动进度条 ===== */
+document.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const p=h.scrollTop/(h.scrollHeight-h.clientHeight||1);
+  const sb=document.getElementById('sbar');if(sb)sb.style.width=(p*100)+'%';
+},{passive:true});
+
+/* ===== 特效开关 ===== */
+const fxKey='wys_fx';
+function applyFx(on){document.body.dataset.fx=on?'on':'off';localStorage.setItem(fxKey,on?'1':'0');const t=document.getElementById('fxSw');if(t)t.classList.toggle('on',on);if(!on){const fx=document.getElementById('fx');if(fx)fx.innerHTML='';}else{renderFx(document.body.dataset.t);}}
+const FX_ON_INIT=localStorage.getItem(fxKey)!=='0';
+document.body.dataset.fx=FX_ON_INIT?'on':'off';
+window.addEventListener('DOMContentLoaded',()=>{const t=document.getElementById('fxSw');if(t)t.classList.toggle('on',FX_ON_INIT);});
+
+/* ===== 主题粒子特效 ===== */
+const FX_N={yiqu:9,yanxiang:8,yupufei:16,wanyi:4,yueyese:14,zhuxi:10,yanru:12,yunniao:5};
+const FX_DUR={yiqu:[9,15],yanxiang:[8,13],yupufei:[1.2,2.4],wanyi:[5,8],yueyese:[7,12],zhuxi:[8,14],yanru:[10,18],yunniao:[16,26]};
+function renderFx(t){
+  const fx=document.getElementById('fx');if(!fx)return;fx.innerHTML='';
+  if(document.body.dataset.fx==='off')return;
+  const n=FX_N[t]||8,[d1,d2]=FX_DUR[t]||[8,14];
+  for(let i=0;i<n;i++){
+    const el=document.createElement('i');
+    el.style.left=(Math.random()*100)+'%';
+    el.style.animationDuration=(d1+Math.random()*(d2-d1))+'s';
+    el.style.animationDelay=(-Math.random()*d2)+'s';
+    if(t==='yueyese'||t==='yanru'){el.style.top=(Math.random()*100)+'%';el.style.bottom='auto';}
+    if(t==='yupufei'||t==='zhuxi'){el.style.top='-8vh';el.style.bottom='auto';}
+    fx.appendChild(el);
+  }
+}
+renderFx(document.body.dataset.t);
+
+/* ===== 触点涟漪 ===== */
+document.addEventListener('touchstart',e=>{
+  const t0=e.touches[0];if(!t0)return;
+  const r=document.createElement('div');r.className='ripple';
+  r.style.left=(t0.clientX-7)+'px';r.style.top=(t0.clientY-7)+'px';
+  document.body.appendChild(r);setTimeout(()=>r.remove(),650);
+},{passive:true});
+
+/* ===== 主题切换水波过场 ===== */
+const _oldTclick=THEMES;
+function waveAt(x,y){
+  const w=document.getElementById('wave');
+  if(!w)return;
+  w.style.setProperty('--wx',x+'px');w.style.setProperty('--wy',y+'px');
+  w.classList.remove('go');void w.offsetWidth;w.classList.add('go');
+}
+
+/* ===== 倒计时秒针微动 ===== */
+const _tick=tick;
+tick=function(){_tick();['cdS'].forEach(i=>{const el=document.getElementById(i);el.classList.add('tick');setTimeout(()=>el.classList.remove('tick'),80);});};
+
+/* ===== 主题 ===== */
+const tgrid=document.getElementById('tgrid');
+/* ===== 时段自动选肤 ===== */
+const AUTO_MAP=[ // [开始小时,主题]
+ [5,'yupufei'],[8,'yiqu'],[11,'yanxiang'],[14,'zhuxi'],
+ [17,'wanyi'],[19,'yanru'],[21,'yueyese'],[23,'yueyese']];
+function autoTheme(){
+  const h=new Date().getHours();
+  let pick=AUTO_MAP[0][1];
+  for(const [sh,t] of AUTO_MAP){if(h>=sh)pick=t;}
+  return pick;
+}
+const MANU_KEY='wys_theme_manual';
+const hasManual=localStorage.getItem(MANU_KEY)==='1';
+const savedT=hasManual?((t=>t&&THEMES.some(x=>x[0]===t)?t:'yiqu')(localStorage.getItem('wys_theme'))):autoTheme();
+
+document.body.dataset.t=savedT;
+THEMES.forEach(t=>{
+  const b=document.createElement('button');b.className='topt'+(t[0]===savedT?' on':'');
+  b.innerHTML=`<div class="bg"><i style="background:${t[4]}"></i><i style="background:${t[2]}"></i><i style="background:${t[3]}"></i></div><div class="nm">${t[1]}<i>${t[5]||''}</i></div>`;
+  b.onclick=(ev)=>{document.body.dataset.t=t[0];localStorage.setItem('wys_theme',t[0]);localStorage.setItem('wys_theme_manual','1');renderFx(t[0]);if(ev)waveAt(ev.clientX,ev.clientY);
+    tgrid.querySelectorAll('.topt').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+    document.querySelector('meta[name=theme-color]').content=t[4];};
+  tgrid.appendChild(b);
+});
+const panel=document.getElementById('panel'),mask=document.getElementById('mask');
+const openPanel=()=>{panel.classList.add('open');mask.classList.add('open');};
+const closePanel=()=>{panel.classList.remove('open');mask.classList.remove('open');};
+document.getElementById('fxSw').onclick=()=>{applyFx(document.body.dataset.fx!=='off');};
+document.getElementById('btnSet').onclick=openPanel;panelX.onclick=closePanel;mask.onclick=closePanel;
+</script>
+</body>
+</html>
