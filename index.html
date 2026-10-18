@@ -42,7 +42,8 @@ header .s{font-size:.72rem;color:var(--ink2);margin-top:1px}
 .wrap{padding:8px 16px 0;max-width:560px;margin:0 auto}
 
 /* now card */
-.now{background:linear-gradient(145deg,var(--acc),color-mix(in srgb,var(--acc) 70%,#000 12%));color:#fff;border-radius:26px;padding:22px 22px 18px;box-shadow:0 14px 34px color-mix(in srgb,var(--acc) 32%,transparent);position:relative;overflow:hidden}
+.now{background:linear-gradient(145deg,color-mix(in srgb,var(--acc) 92%,#fff),color-mix(in srgb,var(--acc) 68%,#000 14%));color:#fff;border-radius:26px;padding:22px 22px 18px;box-shadow:0 14px 34px color-mix(in srgb,var(--acc) 32%,transparent),inset 0 1px 0 rgba(255,255,255,.45),inset 0 -1px 0 rgba(0,0,0,.12);position:relative;overflow:hidden;backdrop-filter:blur(6px)}
+.now::after{box-shadow:inset 0 1px 0 rgba(255,255,255,.2)}
 .now::after{content:"";position:absolute;right:-46px;top:-46px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.10)}
 .now::before{content:"";position:absolute;right:-8px;top:60px;width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.08)}
 .now .lb{font-size:.74rem;opacity:.85;display:flex;align-items:center;gap:6px}
@@ -54,7 +55,7 @@ header .s{font-size:.72rem;color:var(--ink2);margin-top:1px}
 .cd .l{font-size:.66rem;opacity:.78;margin-top:2px}
 
 /* tabs bar */
-.tabs{position:fixed;left:0;right:0;bottom:0;z-index:60;background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--line);display:flex;padding:6px 8px calc(env(safe-area-inset-bottom) + 6px)}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:60;background:color-mix(in srgb,var(--bg) 72%,transparent);backdrop-filter:blur(28px) saturate(1.4);-webkit-backdrop-filter:blur(28px) saturate(1.4);border-top:1px solid color-mix(in srgb,var(--ink) 8%,transparent);box-shadow:0 -4px 24px rgba(0,0,0,.06);display:flex;padding:6px 8px calc(env(safe-area-inset-bottom) + 6px)}
 .tabs button{flex:1;border:0;background:none;color:var(--ink3);font-size:.68rem;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 0;font-family:inherit;transition:color .2s}
 .tabs button svg{width:1.35rem;height:1.35rem}
 .tabs button.on{color:var(--acc);font-weight:600}
@@ -575,7 +576,7 @@ function nextEvent(){
     const hm=e[0].match(/(\d{1,2}):(\d{2})/);
     if(!hm)return; // 无具体时刻的事件不参与倒计时
     const t=new Date(Y,mo-1,dd,+hm[1],+hm[2]);
-    if(t>now) list.push({t,name:e[1],desc:e[2],d:day.d});
+    if(t>now) list.push({t,t2:e[0],name:e[1],desc:e[2],d:day.d});
   }));
   return list[0]||null;
 }
@@ -584,7 +585,7 @@ function tick(){
   if(!ne){['cdD','cdH','cdM','cdS'].forEach(i=>document.getElementById(i).textContent='0');
     document.getElementById('nowTitle').textContent='旅程圆满结束';document.getElementById('nowDate').textContent='期待下次同行';return;}
   document.getElementById('nowTitle').textContent=ne.name;
-  document.getElementById('nowDate').textContent=ne.d+' '+ne.t+' · '+ne.desc;
+  document.getElementById('nowDate').textContent=ne.d+' '+ne.t2+' · '+ne.desc;
   let s=Math.floor((ne.t-new Date())/1000);
   const d=Math.floor(s/86400); s%=86400; const h=Math.floor(s/3600); s%=3600; const m=Math.floor(s/60); s%=60;
   document.getElementById('cdD').textContent=d; document.getElementById('cdH').textContent=String(h).padStart(2,'0');
@@ -791,14 +792,12 @@ const closePanel=()=>{panel.classList.remove('open');mask.classList.remove('open
 document.getElementById('fxSw').onclick=()=>{applyFx(document.body.dataset.fx!=='off');};
 document.getElementById('btnSet').onclick=openPanel;panelX.onclick=closePanel;mask.onclick=closePanel;
 </script>
-<script src="liquidGL.js" defer></script>
 <script>
 /* 液态玻璃: 底部Tab栏 */
 window.addEventListener("DOMContentLoaded",()=>{
  try{
   if(typeof liquidGL==="function" && document.body.dataset.fx!=="off"){
-    window.__lg1=liquidGL({snapshot:"body",target:".tabs",refraction:0.012,bevelDepth:0.06,bevelWidth:0.12,frost:2,shadow:true,specular:true,tilt:false,interaction:"fluid",interactionStrength:0.35,interactionRadius:60,interactionViscosity:0.5});
-    window.__lg2=liquidGL({snapshot:"body",target:".now",refraction:0.01,bevelDepth:0.05,bevelWidth:0.1,frost:1.5,shadow:true,specular:true,tilt:false});
+    
   }
  }catch(e){console.warn("liquidGL skip",e)}
 });
