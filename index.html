@@ -4,7 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
 <meta name="theme-color" content="#f7f5f2">
-<title>武夷山疗休养</title>
+<title>武夷问茶</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="武夷问茶">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="manifest" href="manifest.json">
 <style>
 :root{
   --bg:#f6f4ef; --bg2:#edeae2; --card:#fffefb; --ink:#2a251d; --ink2:#7a7266; --ink3:#b0a899;
@@ -19,7 +25,9 @@
 [data-t="zhuxi"]{--bg:#f3f6ef;--bg2:#e7edde;--card:#fcfef8;--ink:#212819;--ink2:#6c7560;--ink3:#a6ae99;--acc:#5a7a3d;--acc2:#e5efdb;--line:#e1e7d5;}
 [data-t="yanru"]{--bg:#f5f2ea;--bg2:#eae4d4;--card:#fffdf6;--ink:#28241b;--ink2:#746d5c;--ink3:#aca391;--acc:#6b5a2e;--acc2:#efe7d2;--line:#e6ddc9;}
 [data-t="yunniao"]{--bg:#f5f3f8;--bg2:#eae6f0;--card:#fefffe;--ink:#242130;--ink2:#6e6a7c;--ink3:#a8a3b5;--acc:#5b4e8a;--acc2:#e9e5f4;--line:#e5e1eb;}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+body,input,button{user-select:none;-webkit-user-select:none}
+input,.todo .tx,.spot .tx,.tip .tx,.fold{user-select:text;-webkit-user-select:text}
 html{font-size:16px}
 body{font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;padding-bottom:76px;transition:background .3s,color .3s}
 h1,h2,h3{font-weight:700;letter-spacing:.02em;font-family:var(--serif)}
