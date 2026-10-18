@@ -789,8 +789,8 @@ window.addEventListener('load',function(){
       return window.__SCENES&&window.__SCENES[t];
     }
     var canvases=[];
-    [['.tabs',{radius:32,bezel:64,thickness:80,ior:1.5,blur:0.8,specular:0.55,dispersion:0.6,bg:[1,1,1,0.10]}],
-     ['.now',{radius:26,bezel:40,thickness:80,ior:1.5,blur:0.8,specular:0.45,dispersion:0.5,bg:[1,1,1,0.06]}]].forEach(function(cfg){
+    [['.tabs',{radius:32,bezel:40,thickness:56,ior:1.5,blur:0.6,specular:0.4,dispersion:0.5,bg:[1,1,1,0.05]}],
+     ['.now',{radius:26,bezel:28,thickness:48,ior:1.5,blur:0.6,specular:0.35,dispersion:0.5,bg:[1,1,1,0.04]}]].forEach(function(cfg){
       var sel=cfg[0],opt=cfg[1];
       var el=document.querySelector(sel);if(!el)return;
       var cv=document.createElement('canvas');
@@ -820,6 +820,57 @@ window.addEventListener('load',function(){
     },true);
   }catch(e){console.warn('lens init fail',e);}
 });
+</script>
+
+<script>
+/* 放大镜: 按住内容区跟随手指, 圆形玻璃透镜放大1.9x */
+(function(){
+  if(document.body.dataset.fx==='off')return;
+  var lens=document.createElement('div');
+  lens.id='magLens';
+  lens.style.cssText='position:fixed;left:0;top:0;width:150px;height:150px;border-radius:50%;pointer-events:none;z-index:999;overflow:hidden;opacity:0;transition:opacity .18s;box-shadow:0 10px 40px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.5);border:1.5px solid rgba(255,255,255,.45);background:var(--card);display:none';
+  var inner=document.createElement('div');
+  inner.style.cssText='position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform';
+  lens.appendChild(inner);
+  document.body.appendChild(lens);
+  var cur=null,scale=1.9,R=75;
+  function setZoom(el){
+    if(cur===el)return;
+    cur=el; inner.innerHTML='';
+    var r=el.getBoundingClientRect();
+    var c=el.cloneNode(true);
+    c.style.cssText+=';margin:0;box-shadow:none;transform:none;animation:none;transition:none;width:'+r.width+'px;box-sizing:border-box;position:static';
+    inner.style.width=r.width+'px';
+    inner.appendChild(c);
+  }
+  function move(x,y){
+    lens.style.display='block';
+    requestAnimationFrame(function(){lens.style.opacity='1';});
+    lens.style.left=(x-R)+'px'; lens.style.top=(y-R)+'px';
+    if(!cur)return;
+    var r=cur.getBoundingClientRect();
+    var sx=r.width*scale, sy=r.height*scale;
+    // 透镜内坐标: 让手指下的点保持在中心
+    var ix=(x-r.left)*scale, iy=(y-r.top)*scale;
+    inner.style.transform='scale('+scale+') translate('+(-(ix-R)/scale)+'px,'+(-(iy-R)/scale)+'px)';
+  }
+  function hide(){lens.style.opacity='0';cur=null;setTimeout(function(){if(lens.style.opacity==='0')lens.style.display='none';},200);}
+  document.addEventListener('touchstart',function(e){
+    if(e.touches.length!==1)return;
+    var t=e.touches[0], el=document.elementFromPoint(t.clientX,t.clientY);
+    if(!el)return;
+    if(el.closest('.tabs,#settings,button,input,a,select,textarea,.tkt'))return;
+    var card=el.closest('.ev,.tkt,.card,.bk,.sec,#now');
+    if(!card)return;
+    setZoom(card); move(t.clientX,t.clientY);
+  },{passive:true});
+  document.addEventListener('touchmove',function(e){
+    if(lens.style.display==='none'||!e.touches.length)return;
+    var t=e.touches[0]; move(t.clientX,t.clientY);
+  },{passive:true});
+  document.addEventListener('touchend',hide);document.addEventListener('touchcancel',hide);
+  console.log('maglens ready');
+})();
 </script>
 </body>
 </html>
